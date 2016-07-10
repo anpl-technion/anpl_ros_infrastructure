@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+  <model name="april_tag_5">
+    <static>true</static>
+    <pose>0 0 0 -1.5707963267948966 0 0</pose>
+    <link name="tag">
+      <pose>0 0 0 0 0 0</pose>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>
+              model://april_tag_5/meshes/april_tag_5.dae
+            </uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

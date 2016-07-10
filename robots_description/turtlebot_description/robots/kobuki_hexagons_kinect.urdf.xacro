@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+    - Base      : kobuki
+    - Stacks    : hexagons
+    - 3d Sensor : kinect
+-->    
+<robot name="turtlebot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find anpl_inf)/robots_description/turtlebot_description/urdf/turtlebot_library.urdf.xacro" />
+  
+  <kobuki/>
+  <stack_hexagons parent="base_link"/>
+  <sensor_kinect  parent="base_link"/>
+	
+//P3D plugin - create ground truth
+	<gazebo>
+	  <plugin name="ground_truth" filename="libgazebo_ros_p3d.so">
+    	<frameName>map</frameName>
+    	<bodyName>base_footprint</bodyName>
+    	<topicName>ground_truth</topicName>
+    	<updateRate>30.0</updateRate>
+  	</plugin>
+	</gazebo>
+</robot>

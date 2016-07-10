@@ -1,0 +1,31 @@
+<launch>
+    <arg name="world_name" default="corridor2_apriltags.world"/>
+    <arg name="quadrotor1_name" default="ARdrone1"/>
+    <arg name="quadrotor2_name" default="ARdrone2"/>
+
+    <!-- start gazebo -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="use_sim_time" value="true"/>
+        <arg name="debug" value="false"/>
+        <arg name="world_name" value="$(find anpl_inf)/gazebo_worlds/$(arg world_name)"/>
+    </include>
+
+   <!-- start robot state publisher
+   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen" >
+     <param name="publish_frequency" type="double" value="50.0" />
+     <param name="tf_prefix" type="string" value="" />
+   </node> -->
+
+    <group>
+        <arg name="ns" value="$(arg quadrotor1_name)"/>
+		<arg name="robot_name" value="$(arg quadrotor1_name)"/>
+        <!-- Spawn simulated quadrotor uav -->
+        <include file="$(find anpl_inf)/launch/spawn_quadrotor.launch" >
+            <arg name="model" value="$(find cvg_sim_gazebo)/urdf/quadrotor_sensors.urdf.xacro"/> 
+	    <arg name="ns" value="$(arg ns)"/>            
+            <arg name="robot_name" value="$(arg robot_name)"/>
+	    <arg name="init_pose" value="-x 0 -y 0.5 -z 0 -Y 0"/>
+        </include>
+    </group>
+
+</launch>

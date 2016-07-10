@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="ns" default="quadrotor"/> <!--TODO: remove default value-->
+    <arg name="robot_name" default="quadrotor1"/>
+    <arg name="model" default="$(find anpl_inf)/robots_description/quadrotor_description/quadrotor.xacro"/>
+    <arg name="init_pose" default="-x 0 -y 0 -z 0.5 -R 0 -P 0 -Y 0"/>
+    
+
+    <!-- send the robot XML to param server -->
+    <param name="quadrotor_description" command="$(find xacro)/xacro.py '$(arg model)' robot_name:=$(arg ns)" />
+
+   <!-- start robot state publisher -->
+   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen" >
+     <param name="publish_frequency" type="double" value="50.0" />
+     <param name="tf_prefix" type="string" value="" />
+
+	 <remap from="robot_description" to="quadrotor_description" />
+	 <remap from="joint_states" 	 to="joint_states" />
+   </node>
+
+
+
+    <!-- push robot_description to factory and spawn robot in gazebo -->
+    <node name="spawn_quadcopter" pkg="gazebo_ros" type="spawn_model"
+            args="-param quadrotor_description -urdf $(arg init_pose) -model $(arg robot_name)_quadrotor"
+            respawn="false" output="screen"/>
+    <node name="ground_truth_to_tf" pkg="message_to_tf" type="message_to_tf" output="screen">
+        <param name="odometry_topic" value="ground_truth/state" />
+        <param name="frame_id" value="nav" />
+	
+	<remap from="/quadrotor/ardrone/takeoff" to="/ardrone/takeoff" />
+	<remap from="/quadrotor/ardrone/land"    to="/ardrone/land" />
+
+    </node>
+    <!-- node name="hector_pose_estimation" pkg="hector_pose_estimation" type="hector_pose_estimation_node" output="screen"/-->
+</launch>

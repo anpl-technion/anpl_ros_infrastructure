@@ -1,0 +1,58 @@
+<launch>
+    <arg name="base" default="kobuki"/>
+    <arg name="stacks" default="hexagons"/>
+    <arg name="3d_sensor" default="kinect"/>
+    <arg name="world_name" default="cafe.world"/>
+    <arg name="turtlebot1_name" default="turtlebot"/>
+    <arg name="turtlebot2_name" default="turtlebot2"/>
+    <arg name="pioneer1_name" default="pioneer"/>
+    <arg name="pioneer2_name" default="pioneer2"/>
+    <arg name="quadrotor1_name" default="quadrotor"/>
+    <arg name="quadrotor2_name" default="quadrotor2"/>
+
+    <!-- load the robot description (used by one_robot.launch) -->
+    <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find anpl_inf)/robots_description/turtlebot_description/robots/$(arg base)_$(arg stacks)_$(arg 3d_sensor).urdf.xacro'" />
+    <param name="robot_description" command="$(arg urdf_file)" />
+
+    <!-- start gazebo -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="use_sim_time" value="true"/>
+        <arg name="debug" value="false"/>
+        <arg name="world_name" value="$(find anpl_inf)/gazebo_worlds/$(arg world_name)"/>
+    </include>
+
+   <!-- start robot state publisher -->
+   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen" >
+     <param name="publish_frequency" type="double" value="50.0" />
+     <param name="tf_prefix" type="string" value="" />
+   </node>
+
+    <!-- spawn turtlebot1 -->
+    <group ns="$(arg turtlebot1_name)">
+        <arg name="ns" value="$(arg turtlebot1_name)"/>
+        <include file="$(find anpl_inf)/launch/spawn_turtlebot.launch">
+            <arg name="robot_name" value="$(arg ns)"/>
+            <arg name="init_pose" value="-x 2 -y 0 -z 0.189555"/>
+            <!-- z value for specific world-->
+        </include>
+    </group>
+
+    <!-- Spawn simulated quadrotor1-->
+    <group ns="$(arg quadrotor1_name)">
+        <arg name="nameSpace" value="$(arg quadrotor1_name)"/>
+        <include file="$(find anpl_inf)/launch/spawn_quadrotor.launch" >
+            <arg name="robot_name" value="$(arg nameSpace)"/>
+            <arg name="init_pose" value="-x 0 -y 0 -z 0.5 -R 0 -P 0 -Y 0"/>
+        </include>
+    </group>
+
+    <!-- Spawn simulated pioneer1 -->
+    <group ns="$(arg pioneer1_name)">
+        <arg name="ns" value="$(arg pioneer1_name)"/>
+        <include file="$(find anpl_inf)/launch/spawn_pioneer3at.launch" >
+            <arg name="robot_name" value="$(arg ns)"/>
+            <arg name="init_pose" value="-x 2 -y 3 -z 0.189555"/>
+        </include>
+    </group>
+
+</launch>

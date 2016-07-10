@@ -1,0 +1,49 @@
+<launch>
+    <arg name="base" default="kobuki"/>
+    <arg name="stacks" default="hexagons"/>
+    <arg name="3d_sensor" default="asus_xtion_pro"/>
+    <arg name="world_name" default="cafe.world"/>
+    <arg name="turtlebot1_name" default="leader"/>
+    <arg name="turtlebot2_name" default="follower"/>
+	<arg name="quadrotor1_name" default="quadrotor1"/>
+
+    <!-- start gazebo -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="use_sim_time" value="true"/>
+        <arg name="debug" value="false"/>
+        <arg name="world_name" value="$(find anpl_inf)/gazebo_worlds/$(arg world_name)"/>
+    </include>
+
+    <!-- spawn the two robots -->
+    <group ns="$(arg turtlebot1_name)">
+        <param name="tf_prefix" value="$(arg turtlebot1_name)"/>
+        <include file="$(find anpl_inf)/launch/spawn_turtlebot.launch">
+			<arg name="ns" value="$(arg turtlebot1_name)"/>            
+			<arg name="robot_name" value="$(arg turtlebot1_name)"/>
+            <arg name="init_pose" value="-x 2 -y 0 -z 0.189555"/>
+            <!-- z value for specific world-->
+        </include>
+    </group>
+
+    <group ns="$(arg turtlebot2_name)">
+        <param name="tf_prefix" value="$(arg turtlebot2_name)"/>
+        <include file="$(find anpl_inf)/launch/spawn_turtlebot.launch">
+			<arg name="ns" value="$(arg turtlebot2_name)"/>
+            <arg name="robot_name" value="$(arg turtlebot2_name)"/>
+            <arg name="init_pose" value="-x 2 -y -3 -z 0.189555"/>
+            <!-- z value for specific world-->
+        </include>
+    </group>
+
+    <group>
+        <arg name="ns" value="$(arg quadrotor1_name)"/>
+		<arg name="robot_name" value="$(arg quadrotor1_name)"/>
+        <!-- Spawn simulated quadrotor uav -->
+        <include file="$(find anpl_inf)/launch/spawn_quadrotor.launch" >
+            <arg name="model" value="$(find cvg_sim_gazebo)/urdf/quadrotor_sensors.urdf.xacro"/> 
+			<arg name="ns" value="$(arg ns)"/>            
+			<arg name="robot_name" value="$(arg robot_name)"/>
+        </include>
+    </group>
+
+</launch>

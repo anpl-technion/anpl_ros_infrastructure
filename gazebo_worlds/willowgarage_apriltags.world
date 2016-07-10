@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="default">
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://willowgarage</uri>
+    </include>
+    <include>
+      <uri>model://april_tag_0</uri>
+      <name>april_tag_0</name>
+      <pose>0.0 0.25 0.0 0.0 1.5708 0.0</pose>
+      <scale>1.0 1.0 1.0</scale>
+    </include>
+    <include>
+      <uri>model://april_tag_1</uri>
+      <name>april_tag_1</name>
+      <pose>-4 0.0 0.0 0.0 1.5708 0.0</pose>
+      <scale>1.0 1.0 1.0</scale>
+    </include>
+  </world>
+</sdf>

@@ -1,0 +1,6 @@
+float32[] p_org
+float32[] rot_m
+---
+sensor_msgs/CompressedImage img
+sensor_msgs/Image dpt
+float32[] ground_truth

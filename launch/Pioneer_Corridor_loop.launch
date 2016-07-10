@@ -1,0 +1,22 @@
+<launch>
+	<arg name="world_name" default="corridor2.world"/>
+    <arg name="pioneer1_name" default="pioneer1"/>
+    <arg name="pioneer2_name" default="pioneer2"/>
+
+    <!-- start gazebo -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="use_sim_time" value="true"/>
+        <arg name="debug" value="false"/>
+        <arg name="world_name" value="$(find anpl_inf)/gazebo_worlds/$(arg world_name)"/>
+    </include>
+
+    <!-- Spawn simulated pioneer1 -->
+    <group ns="$(arg pioneer1_name)">
+        <arg name="ns" value="$(arg pioneer1_name)"/>
+        <include file="$(find anpl_inf)/launch/spawn_pioneer3at.launch" >
+            <arg name="robot_name" value="$(arg ns)"/>
+            <arg name="init_pose" value="-x 0 -y 0.5 -z 0 -Y 0"/>
+        </include>
+    </group>
+
+</launch>

@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<sdf version="1.4">
+  <world name="default">
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://Indoor_structure</uri>
+    </include>
+    <include>
+      <uri>model://table</uri>
+      <pose>-0.15 -1 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://cafe_table</uri>
+      <pose>-0.15 3.5 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://cafe_table</uri>
+      <pose>-2.35 3.5 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://bookshelf</uri>
+      <pose>-2.55 0.601 0 0 0 3.1416</pose>
+    </include>
+    <include>
+      <uri>model://bowl</uri>
+      <pose>-2.55 0.8 0.1 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Desktop_PC</uri>
+      <pose>-0.5 -1.25 1.02 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://PC2</uri>
+      <pose>-2.58 -1.3 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Kitchen</uri>
+      <pose>-8.2 -0.2295 0 0 0 3.1416</pose>
+    </include>
+    <include>
+      <uri>model://Sofa</uri>
+      <pose>-0.15 4.48 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Sofa</uri>
+      <pose>-2.35 4.48 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Sofa</uri>
+      <pose>-0.15 1.05 0 0 0 3.1416</pose>
+    </include>
+    <include>
+      <uri>model://Wall_Paint</uri>
+      <pose>-4 -0.4 1 0 0 1.5708</pose>
+    </include>
+    <include>
+      <uri>model://Kitchen_Table</uri>
+      <pose>-1.7 2.8 0.625 0 0 1.5708</pose>
+    </include>
+    <include>
+      <uri>model://Plant1</uri>
+      <pose>-7.26 -0.5 0 0 0 1.5708</pose>
+    </include>
+    <include>
+      <uri>model://Plant2</uri>
+      <pose>-1.9 0.43 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Plant3</uri>
+      <pose>-6.2 0.5 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Wall_Paint1</uri>
+      <pose>-1.3 5 0.7 0 0 -1.5708</pose>
+    </include>
+    <include>
+      <uri>model://Wall_Paint2</uri>
+      <pose>-0.84 -6.03 1 0 0 1.5708</pose>
+    </include>
+    <include>
+      <uri>model://Wall_Paint3</uri>
+      <pose>-7.8 -3.6 1 0 0 1.5708</pose>
+    </include>
+    <include>
+      <uri>model://PC-set</uri>
+      <pose>-3.12 -2.44 0 0 0 1.5708</pose>
+    </include>
+    <include>
+      <uri>model://Toilets</uri>
+      <pose>-7.5 -5.03 0 0 0 -3.1416</pose>
+    </include>
+    <include>
+      <uri>model://Computer_Chair1</uri>
+      <pose>-1.7 -1 0 0 0 -3.1416</pose>
+    </include>
+    <include>
+      <uri>model://Computer_Chair1</uri>
+      <pose>-4 -1 0 0 0 -3.1416</pose>
+    </include>
+    <include>
+      <uri>model://Computer_Chair2</uri>
+      <pose>0.066 -1.929 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Computer_Chair3</uri>
+      <pose>5 1 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Door</uri>
+      <pose>0.96 -0.52 0 0 0 1.570</pose>
+    </include>
+    <include>
+      <uri>model://Coffee_Machine</uri>
+      <pose>-7.5 3.25 0.715 0 0 1.5708</pose>
+    </include>
+  </world>
+</sdf>

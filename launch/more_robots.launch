@@ -1,0 +1,90 @@
+<launch>
+    <arg name="base" default="kobuki"/>
+    <arg name="stacks" default="hexagons"/>
+    <arg name="3d_sensor" default="kinect"/>
+    <arg name="world_name" default="cafe.world"/>
+    <arg name="turtlebot1_name" default="turtlebot1"/>
+    <arg name="turtlebot2_name" default="turtlebot2"/>
+    <arg name="pioneer1_name" default="pioneer1"/>
+    <arg name="pioneer2_name" default="pioneer2"/>
+    <arg name="quadrotor1_name" default="quadrotor1"/>
+    <arg name="quadrotor2_name" default="quadrotor2"/>
+	<arg name="isKeyopOnLoad"   default="false"/>
+
+    <!-- start gazebo -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="use_sim_time" value="true"/>
+        <arg name="debug" value="false"/>
+        <arg name="world_name" value="$(find gtsam_infrastructure)/gazebo_worlds/$(arg world_name)"/>
+    </include>
+
+    <!-- spawn turtlebot1 -->
+    <group ns="$(arg turtlebot1_name)">
+        <param name="tf_prefix" value="$(arg turtlebot1_name)"/>
+        <include file="$(find gtsam_infrastructure)/launch/spawn_turtlebot.launch">
+			<arg name="ns" value="$(arg turtlebot1_name)"/>            
+			<arg name="robot_name" value="$(arg turtlebot1_name)"/>
+            <arg name="init_pose" value="-x 2 -y 0 -z 0.189555"/>
+            <!-- z value for specific world-->
+        </include>
+        <node if="$(arg isKeyopOnLoad)" pkg="tum_ardrone" type="drone_gui" name="gui" output="screen">
+            <remap from="cmd_vel" to="mobile_base/commands/velocity"/>
+        </node>
+    </group>
+
+    <!-- spawn turtlebot2 -->
+    <group ns="$(arg turtlebot2_name)">
+        <param name="tf_prefix" value="$(arg turtlebot2_name)"/>
+        <include file="$(find gtsam_infrastructure)/launch/spawn_turtlebot.launch">
+			<arg name="ns" value="$(arg turtlebot2_name)"/>
+            <arg name="robot_name" value="$(arg turtlebot2_name)"/>
+            <arg name="init_pose" value="-x 2 -y -3 -z 0.189555"/>
+            <!-- z value for specific world-->
+        </include>		
+         <node if="$(arg isKeyopOnLoad)" pkg="tum_ardrone" type="drone_gui" name="gui" output="screen">
+            <remap from="cmd_vel" to="mobile_base/commands/velocity"/>
+        </node>
+    </group>
+
+    <!-- Spawn simulated quadrotor1-->
+    <group ns="$(arg quadrotor1_name)">
+        <arg name="nameSpace" value="$(arg quadrotor1_name)"/>
+        <include file="$(find gtsam_infrastructure)/launch/spawn_quadrotor.launch" >
+            <arg name="robot_name" value="$(arg nameSpace)"/>
+            <arg name="init_pose" value="-x 0 -y 0 -z 0.5 -R 0 -P 0 -Y 0"/>
+        </include>
+         <node if="$(arg isKeyopOnLoad)" pkg="tum_ardrone" type="drone_gui" name="gui" output="screen"/>
+    </group>
+
+    <!-- Spawn simulated quadrotor2
+    <group>
+        <arg name="nameSpace" value="$(arg quadrotor2_name)"/>
+        <include file="$(find gtsam_infrastructure)/launch/spawn_quadrotor.launch" >
+            <arg name="robot_name" value="$(arg nameSpace)"/>
+            <arg name="init_pose" value="-x 0 -y 3 -z 0.5 -R 0 -P 0 -Y 0"/>
+        </include>
+        <group ns="$(arg nameSpace)">
+             <node if="$(arg isKeyopOnLoad)" pkg="tum_ardrone" type="drone_gui" name="gui" output="screen"/>
+        </group>
+    </group> -->
+
+    <!-- Spawn simulated pioneer1 -->
+    <group ns="$(arg pioneer1_name)">
+        <arg name="ns" value="$(arg pioneer1_name)"/>
+        <include file="$(find gtsam_infrastructure)/launch/spawn_pioneer3at.launch" >
+            <arg name="robot_name" value="$(arg ns)"/>
+            <arg name="init_pose" value="-x 2 -y 3 -z 0.189555"/>
+        </include>
+         <node if="$(arg isKeyopOnLoad)" pkg="tum_ardrone" type="drone_gui" name="gui" output="screen"/>
+    </group>
+
+    <!-- Spawn simulated pioneer2 -->
+    <group ns="$(arg pioneer2_name)">
+        <arg name="ns" value="$(arg pioneer2_name)"/>
+        <include file="$(find gtsam_infrastructure)/launch/spawn_pioneer3at.launch" >
+            <arg name="robot_name" value="$(arg ns)"/>
+            <arg name="init_pose" value="-x 2 -y -6 -z 0.189555"/>
+        </include>
+         <node if="$(arg isKeyopOnLoad)" pkg="tum_ardrone" type="drone_gui" name="gui" output="screen"/>
+    </group>
+</launch>

@@ -1,0 +1,60 @@
+<launch>
+    <arg name="base" default="kobuki"/>
+    <arg name="stacks" default="hexagons"/>
+    <arg name="3d_sensor" default="asus_xtion_pro"/>
+    <arg name="world_name" default="cafe.world"/>
+    <arg name="turtlebot1_name" default="leader"/>
+    <arg name="turtlebot2_name" default="follower"/>
+	<arg name="quadrotor1_name" default="quadrotor1"/>
+	<arg name="quadrotor2_name" default="quadrotor2"/>
+
+    <!-- start gazebo -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="use_sim_time" value="true"/>
+        <arg name="debug" value="false"/>
+        <arg name="world_name" value="$(find anpl_inf)/gazebo_worlds/$(arg world_name)"/>
+    </include>
+
+    <!-- spawn turtlebot1 -->
+    <group ns="$(arg hostName)/$(arg turtlebot1_name)">
+		<arg name="ns" value="$(arg hostName)/$(arg turtlebot1_name)"/>
+		<arg name="robot_name" value="$(arg hostName)_$(arg turtlebot1_name)"/>
+
+        <param name="tf_prefix" value="$(arg ns)"/>
+        <include file="$(find anpl_inf)/launch/spawn_turtlebot.launch">
+			<arg name="ns" value="$(arg ns)"/>
+            <arg name="robot_name" value="$(arg robot_name)"/>
+            <arg name="init_pose" value="-x 2 -y 0 -z 0.189555"/>
+            <!-- z value for specific world -->
+        </include>
+    </group>
+
+	<!-- spawn turtlebot2 -->
+    <group ns="$(arg hostName)/$(arg turtlebot2_name)">
+		<arg name="ns" value="$(arg hostName)/$(arg turtlebot2_name)"/>
+		<arg name="robot_name" value="$(arg hostName)_$(arg turtlebot2_name)"/>
+
+        <param name="tf_prefix" value="$(arg ns)"/>
+        <include file="$(find anpl_inf)/launch/spawn_turtlebot.launch">
+			<arg name="ns" value="$(arg ns)"/>            
+			<arg name="robot_name" value="$(arg robot_name)"/>
+            <arg name="init_pose" value="-x 2 -y -3 -z 0.189555"/>
+            <!-- z value for specific world -->
+        </include>
+    </group>
+
+    <!-- Spawn simulated quadrotor1 -->
+    <group ns="$(arg hostName)/$(arg quadrotor1_name)">
+        <arg name="ns" value="$(arg hostName)/$(arg quadrotor1_name)"/>
+		<arg name="robot_name" value="$(arg hostName)_$(arg quadrotor1_name)"/>
+
+		<param name="tf_prefix" value="$(arg ns)"/>
+        <include file="$(find anpl_inf)/launch/spawn_quadrotor.launch" >
+			<arg name="ns" value="$(arg ns)"/>            
+			<arg name="robot_name" value="$(arg robot_name)"/>
+            <arg name="init_pose" value="-x 0 -y 0 -z 0.5 -R 0 -P 0 -Y 0"/>
+        </include>
+        <node if="false" pkg="tum_ardrone" type="drone_gui" name="$(anon gui)" output="screen"/>
+    </group>
+
+</launch>
