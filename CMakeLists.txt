@@ -25,7 +25,7 @@ find_package(PCL 1.7 REQUIRED)
 if(${ARCHITECTURE} MATCHES ${odroid} )
 	set(OMPL_LIBRARIES ompl ${BOOST_LIBRARIES} "-Wl,-rpath $ENV{HOME}/prefix/lib/arm-linux-gnueabihf")
 else()
-	set(OMPL_LIBRARIES ompl ${BOOST_LIBRARIES} "-Wl,-rpath $ENV{HOME}/prefix/lib/x86_64-linux-gnu")
+	set(OMPL_LIBRARIES_OLD ompl ${BOOST_LIBRARIES} "-Wl,-rpath $ENV{HOME}/prefix/lib/x86_64-linux-gnu")
 endif()
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -149,6 +149,8 @@ if(${ARCHITECTURE} MATCHES ${odroid} )
 else()
 	link_directories(~/prefix/lib/x86_64-linux-gnu)
 endif()
+
+find_package(ompl)
 
 add_executable(tal src/tal.cpp)
 target_link_libraries(tal ${catkin_LIBRARIES})
