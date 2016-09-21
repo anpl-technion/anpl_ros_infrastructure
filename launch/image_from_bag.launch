@@ -1,0 +1,9 @@
+<launch>
+  <arg name="bagfile_dir" default="/home/asaffeniger/ANPL/data/bags/vision"/>
+  <arg name="bagfile_name" default="pioneer_odom_camera_front_2016-07-13-10-56-43"/>
+
+  <node pkg="rosbag" type="play" name="rosbag" args="-d 2 $(arg bagfile_dir)/$(arg bagfile_name).bag"/>
+  <node name="extract" pkg="image_view" type="extract_images" respawn="false" output="screen" cwd="ROS_HOME">
+  <remap from="image" to="/camera/image_raw"/>
+</node>
+</launch>
