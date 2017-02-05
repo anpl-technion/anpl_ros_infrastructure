@@ -13,6 +13,8 @@ find_package(catkin REQUIRED COMPONENTS
   nav_msgs
   message_generation
   tf
+  rotors_gazebo
+  rotors_control
 )
 
 ## System dependencies are found with CMake's conventions
@@ -152,42 +154,42 @@ endif()
 
 find_package(ompl)
 
-add_executable(tal src/tal.cpp)
-target_link_libraries(tal ${catkin_LIBRARIES})
+add_executable(mav_takeoff src/mav_takeoff.cpp)
+target_link_libraries(mav_takeoff ${catkin_LIBRARIES})
 
-add_executable(OdometryExample src/OdometryExample.cpp)
-target_link_libraries(OdometryExample ${GTSAM_LIBRARIES})
+#add_executable(OdometryExample src/OdometryExample.cpp)
+#target_link_libraries(OdometryExample ${GTSAM_LIBRARIES})
 
-add_executable(LocalizationExample src/LocalizationExample.cpp)
-target_link_libraries(LocalizationExample ${GTSAM_LIBRARIES})
+#add_executable(LocalizationExample src/LocalizationExample.cpp)
+#target_link_libraries(LocalizationExample ${GTSAM_LIBRARIES})
 
-add_executable(easyPoint2KalmanFilter src/easyPoint2KalmanFilter.cpp)
-target_link_libraries(easyPoint2KalmanFilter ${GTSAM_LIBRARIES})
+#add_executable(easyPoint2KalmanFilter src/easyPoint2KalmanFilter.cpp)
+#target_link_libraries(easyPoint2KalmanFilter ${GTSAM_LIBRARIES})
 
-add_executable(match_pcl src/match_pcl.cpp)
-target_link_libraries(match_pcl ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+#add_executable(match_pcl src/match_pcl.cpp)
+#target_link_libraries(match_pcl ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 
-add_executable(incrementally_pairs_of_clouds src/incrementally_pairs_of_clouds.cpp)
-target_link_libraries(incrementally_pairs_of_clouds ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+#add_executable(incrementally_pairs_of_clouds src/incrementally_pairs_of_clouds.cpp)
+#target_link_libraries(incrementally_pairs_of_clouds ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 
-add_executable(icp_pcl_check src/icp_pcl_check.cpp)
-target_link_libraries(icp_pcl_check ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+#add_executable(icp_pcl_check src/icp_pcl_check.cpp)
+#target_link_libraries(icp_pcl_check ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 
-add_executable(test_icp src/test_icp/test_program.cpp)
-target_link_libraries(test_icp ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+#add_executable(test_icp src/test_icp/test_program.cpp)
+#target_link_libraries(test_icp ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 
 
-add_executable(icp_program src/test_icp/icp_program.cpp)
-target_link_libraries(icp_program ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+#add_executable(icp_program src/test_icp/icp_program.cpp)
+#target_link_libraries(icp_program ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 
-add_executable(PlannerData src/PlannerData.cpp)
-target_link_libraries(PlannerData ${OMPL_LIBRARIES} ${GTSAM_LIBRARIES})
+#add_executable(PlannerData src/PlannerData.cpp)
+#target_link_libraries(PlannerData ${OMPL_LIBRARIES} ${GTSAM_LIBRARIES})
 
-add_executable(pirate_keybord src/pirate_keybord.cpp)
-target_link_libraries(pirate_keybord ${BOOST_LIBRARIES} ${catkin_LIBRARIES})
+#add_executable(pirate_keybord src/pirate_keybord.cpp)
+#target_link_libraries(pirate_keybord ${BOOST_LIBRARIES} ${catkin_LIBRARIES})
 
-add_executable(pioneerTfPublisher src/pioneerTfPublisher.cpp)
-target_link_libraries(pioneerTfPublisher ${catkin_LIBRARIES})
+#add_executable(pioneerTfPublisher src/pioneerTfPublisher.cpp)
+#target_link_libraries(pioneerTfPublisher ${catkin_LIBRARIES})
 
 ## Declare a C++ library
 # add_library(anpl_inf
