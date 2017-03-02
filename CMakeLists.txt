@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   rotors_gazebo
   rotors_control
+  rviz
 )
 
 ## System dependencies are found with CMake's conventions
