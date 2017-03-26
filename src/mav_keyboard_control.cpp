@@ -253,8 +253,17 @@ void move(const char tav, const ros::Publisher &trajectory_pub)
         is_takeoff = false;
         ROS_INFO("Land");
       }
+      
+      if(n_seq == 0) // first takeoff
+      {
+        desired_yaw = M_PI / 2;
+        ROS_INFO("Takeoff at: [%f, %f, %f], yaw: %f.", desired_x, desired_y, desired_z, desired_yaw);
+      }
+      else
+      {
+        desired_yaw = current_yaw;
+      }
 
-      desired_yaw = current_yaw;
       break;
     }
 
