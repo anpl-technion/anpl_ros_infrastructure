@@ -15,7 +15,7 @@
         <arg name="ns" value="$(arg pioneer1_name)"/>
         <include file="$(find anpl_inf)/launch/spawn_pioneer3at.launch" >
             <arg name="robot_name" value="$(arg ns)"/>
-            <arg name="init_pose" value="-x -9.22 -y -19.36 -z 0 -Y 1.5708"/>
+            <arg name="init_pose" value="-x -9.22 -y -19.36 -z 0 -Y 1.5708 -R 0.0 -P 0.0"/>
         </include>
     </group>
 

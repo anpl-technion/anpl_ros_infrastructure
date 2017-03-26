@@ -1,0 +1,24 @@
+<launch>
+    <arg name="ns" default="pioneer"/> <!--TODO: remove default value-->
+    <arg name="robot_name"/>	
+    <arg name="init_pose"/>
+    <arg name="robot_type" default="pioneer3at"/>
+    <arg name="sensor" default="hokuyo"/>
+
+    <!-- load the robot description -->
+    <arg name="model" default="$(find xacro)/xacro.py '$(find anpl_inf)/robots_description/pioneer_description/urdf/$(arg robot_type).urdf.xacro'" />
+    <param name="robot_description" command="$(arg model)" />
+
+   <!-- start robot state publisher -->
+   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen" >
+     <param name="publish_frequency" type="double" value="50.0" />
+     <param name="tf_prefix" type="string" value="" />
+   </node>
+  
+    <!-- Gazebo model spawner -->
+    <node name="$(arg robot_name)_spawn_pioneer_model" pkg="gazebo_ros" type="spawn_model"
+          args="$(arg init_pose) -unpause -urdf -param robot_description -model $(arg robot_name)_(arg robot_type)"/>
+
+>
+</launch>
+
