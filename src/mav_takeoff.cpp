@@ -56,9 +56,9 @@ int main(int argc, char** argv){
     ROS_INFO("Unpaused the Gazebo simulation.");
   }
 
-  // Wait for 5 seconds to let the Gazebo GUI show up.
-  ROS_INFO("Wait for 5 seconds to let the Gazebo GUI show up.");
-  ros::Duration(5.0).sleep();
+  // Wait for 10 seconds to let the Gazebo GUI show up.
+  ROS_INFO("Wait for 10 seconds to let the Gazebo GUI show up.");
+  ros::Duration(10.0).sleep();
 
   trajectory_msgs::MultiDOFJointTrajectory trajectory_msg;
   int n_seq = 0;
@@ -76,7 +76,9 @@ int main(int argc, char** argv){
            desired_position.y(),
            desired_position.z());
   trajectory_pub.publish(trajectory_msg);
-
+  nh.setParam("/firefly/mav_takeoff", true);
+  
+/*
   ROS_INFO("Wait for 5 seconds and move to next wp.");
   ros::Duration(5.0).sleep();
   n_seq++;
@@ -84,7 +86,7 @@ int main(int argc, char** argv){
   trajectory_msg.header.seq = n_seq;
   trajectory_msg.header.stamp = ros::Time::now();
 
-  desired_position = Eigen::Vector3d(-9.22, -17.36, 1.0);
+  desired_position = Eigen::Vector3d(-9.22, -16.36, 1.0);
   desired_yaw = 1.5708;
   mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
       desired_yaw, &trajectory_msg);
@@ -103,7 +105,7 @@ int main(int argc, char** argv){
   trajectory_msg.header.seq = n_seq;
   trajectory_msg.header.stamp = ros::Time::now();
 
-  desired_position = Eigen::Vector3d(-9.22, -15.36, 1.0);
+  desired_position = Eigen::Vector3d(-9.22, -13.36, 1.0);
   desired_yaw = 1.5708;
   mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
       desired_yaw, &trajectory_msg);
@@ -115,5 +117,43 @@ int main(int argc, char** argv){
            desired_position.z());
   trajectory_pub.publish(trajectory_msg);
 
+  ROS_INFO("Wait for 5 seconds and move to next wp.");
+  ros::Duration(5.0).sleep();
+  n_seq++;
+
+  trajectory_msg.header.seq = n_seq;
+  trajectory_msg.header.stamp = ros::Time::now();
+
+  desired_position = Eigen::Vector3d(-9.22, -10.36, 1.0);
+  desired_yaw = 1.5708;
+  mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
+      desired_yaw, &trajectory_msg);
+
+  ROS_INFO("Publishing waypoint on namespace %s: [%f, %f, %f].",
+           nh.getNamespace().c_str(),
+           desired_position.x(),
+           desired_position.y(),
+           desired_position.z());
+  trajectory_pub.publish(trajectory_msg);
+
+  ROS_INFO("Wait for 5 seconds and move to next wp.");
+  ros::Duration(5.0).sleep();
+  n_seq++;
+
+  trajectory_msg.header.seq = n_seq;
+  trajectory_msg.header.stamp = ros::Time::now();
+
+  desired_position = Eigen::Vector3d(-9.22, -07.36, 1.0);
+  desired_yaw = 1.5708;
+  mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
+      desired_yaw, &trajectory_msg);
+
+  ROS_INFO("Publishing waypoint on namespace %s: [%f, %f, %f].",
+           nh.getNamespace().c_str(),
+           desired_position.x(),
+           desired_position.y(),
+           desired_position.z());
+  trajectory_pub.publish(trajectory_msg);
+*/
   ros::spin();
 }
