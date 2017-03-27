@@ -1,10 +1,9 @@
 <launch>
   <!-- send table.xml to param server -->
-  <arg name="robot_name" default="pioneer1"/>
-  <arg name="init_pose"/>
-  <arg name="model" default="$(find amr_robots_description)/urdf/pioneer3at.urdf.xacro" />
-  <param name="robot_description" command="$(find xacro)/xacro '$(arg model)'" />
-  <node name="spawn_pioneer" pkg="gazebo_ros" type="spawn_model" args="$(arg init_pose) -unpause -urdf -param robot_description -model $(arg robot_name)_Pioneer3at" respawn="false" output="screen" />
+    <arg name="robot_name" default="pioneer1"/>
+    <arg name="init_pose"/>
+  <param name="robot_description3" command="$(find xacro)/xacro.py '$(find anpl_inf)/robots_description/pioneer_description/pioneer3at.xacro' robot_name:=$(arg robot_name)" />
+<node name="spawn_pioneer" pkg="gazebo_ros" type="spawn_model" args="$(arg init_pose) -unpause -urdf -param robot_description3 -model $(arg robot_name)_Pioneer3at" respawn="false" output="screen" />
 
 </launch>
 
