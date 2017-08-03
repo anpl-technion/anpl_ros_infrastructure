@@ -1,0 +1,23 @@
+ <launch>
+
+  <!-- Parameters to change each time-->
+    <!--<arg name="path" default="/media/ubuntu/c640a71f-1aef-4140-98bc-38836ec21e771/ubuntu/ANPL/data" />-->
+    <arg name="path" default="/home/ubuntu/ANPL/data" />
+
+
+
+ <!-- Putting the time back to real time-->
+    <rosparam>
+       /use_sim_time : false
+    </rosparam>
+
+ <node pkg="rosbag" type="record" name="record_zed_depth_image" respawn="true" output="screen"
+    args="/zed/depth/depth_registered -o $(arg path)/zed_depth"/> 
+
+ <node pkg="rosbag" type="record" name="record_zed_odom" respawn="true" output="screen"
+    args="/zed/odom -o $(arg path)/zed_odom"/>
+
+ <node pkg="rosbag" type="record" name="record_zed_depth_points" respawn="true" output="screen"
+    args="/zed/point_cloud/cloud_registered -o $(arg path)/zed_points"/> 
+
+  </launch>

@@ -1,0 +1,49 @@
+<launch>
+
+  <!-- Parameters to change each time-->
+    <arg name="path" default="/home/asafeniger/ANPL/data/MR_LASER" />
+    <arg name="robot1_bag" default="pioneer_laser_01.bag" />
+    <arg name="robot1_name" default="pioneer1" />
+    <arg name="robot2_bag" default="pioneer_laser_02.bag" />
+    <arg name="robot2_name" default="pioneer2" />
+    <arg name="robot3_bag" default="pioneer_laser_03.bag" />
+    <arg name="robot3_name" default="pioneer3" />
+    <arg name="robot4_bag" default="pioneer_laser_04.bag" />
+    <arg name="robot4_name" default="pioneer4" />
+
+
+
+ <!-- Putting the time back to real time-->
+    <rosparam>
+       /use_sim_time : false
+    </rosparam>
+
+ <node pkg="rosbag" type="play" name="play_robot1" output="screen"
+    args="--clock $(arg path)/$(arg robot1_bag)">
+    <remap from="/pioneer1/odom" to="/$(arg robot1_name)/odom"/>
+    <remap from="/pioneer1/laser" to="/$(arg robot1_name)/laser"/>
+    <remap from="/gazebo/model_states" to="/$(arg robot1_name)/ground_truth"/>
+ </node>
+
+ <node pkg="rosbag" type="play" name="play_robot2" output="screen"
+    args="--clock $(arg path)/$(arg robot2_bag)">
+    <remap from="/pioneer1/odom" to="/$(arg robot2_name)/odom"/>
+    <remap from="/pioneer1/laser" to="/$(arg robot2_name)/laser"/>
+    <remap from="/gazebo/model_states" to="/$(arg robot2_name)/ground_truth"/>
+ </node>
+
+ <node pkg="rosbag" type="play" name="play_robot3" output="screen"
+    args="--clock $(arg path)/$(arg robot3_bag)">
+    <remap from="/pioneer1/odom" to="/$(arg robot3_name)/odom"/>
+    <remap from="/pioneer1/laser" to="/$(arg robot3_name)/laser"/>
+    <remap from="/gazebo/model_states" to="/$(arg robot3_name)/ground_truth"/>
+ </node>
+
+ <node pkg="rosbag" type="play" name="play_robot4" output="screen"
+    args="--clock $(arg path)/$(arg robot4_bag)">
+    <remap from="/pioneer1/odom" to="/$(arg robot4_name)/odom"/>
+    <remap from="/pioneer1/laser" to="/$(arg robot4_name)/laser"/>
+    <remap from="/gazebo/model_states" to="/$(arg robot4_name)/ground_truth"/>
+ </node>
+
+  </launch>

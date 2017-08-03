@@ -1,0 +1,22 @@
+<launch>
+
+  <!-- Parameters to change each time-->
+    <arg name="path" default="/home/asafeniger/ANPL/data/tx1" />
+    <arg name="odom_bag" default="zed_odom_2017-07-04-15-11-04.bag" />
+    <arg name="stereo_bag" default="zed_stereo_2017-07-04-15-11-04.bag" />
+
+
+
+ <!-- Putting the time back to real time-->
+    <rosparam>
+       /use_sim_time : false
+    </rosparam>
+
+ <node pkg="rosbag" type="play" name="play_zed_stereo" output="screen"
+    args="--clock $(arg path)/$(arg stereo_bag)"/> 
+
+ <node pkg="rosbag" type="play" name="play_zed_odom" output="screen"
+    args="--clock $(arg path)/$(arg odom_bag)"/> 
+
+
+  </launch>

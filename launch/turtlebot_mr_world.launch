@@ -1,0 +1,37 @@
+<launch>
+    
+  <arg name="world_name" default="willowgarage.world"/> <!-- willowgarage.world,cafe.world -->
+  <arg name="turtlebot1_name" default="turtlebot1"/>
+  <arg name="turtlebot2_name" default="turtlebot2"/>
+  <arg name="base" default="kobuki"/> <!-- create, roomba -->
+  <arg name="stacks" default="hexagons"/> <!-- circles, hexagons --> 
+  <arg name="3d_sensor" default="asus_xtion_pro"/> <!-- kinect, asus_xtion_pro --> 
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false"/>
+    <arg name="world_name" value="$(find anpl_inf)/gazebo_worlds/$(arg world_name)"/>
+  </include>
+
+  <!-- spawn the two robots -->
+  <group ns="$(arg turtlebot1_name)">
+      <param name="tf_prefix" value="$(arg turtlebot1_name)"/>
+      <include file="$(find anpl_inf)/launch/spawn_turtlebot.launch">
+	<arg name="ns" value="$(arg turtlebot1_name)"/>            
+        <arg name="robot_name" value="$(arg turtlebot1_name)"/>
+        <arg name="init_pose" value="-x -9.22 -y -19.36 -z 0 -Y 1.5708"/>
+        <!-- z value for specific world-->
+      </include>
+  </group>
+
+  <group ns="$(arg turtlebot2_name)">
+      <param name="tf_prefix" value="$(arg turtlebot2_name)"/>
+      <include file="$(find anpl_inf)/launch/spawn_turtlebot.launch">
+	<arg name="ns" value="$(arg turtlebot2_name)"/>            
+        <arg name="robot_name" value="$(arg turtlebot2_name)"/>
+        <arg name="init_pose" value="-x 0 -y 0 -z 0 -Y -1.5708"/>
+        <!-- z value for specific world-->
+      </include>
+  </group>
+</launch>
+

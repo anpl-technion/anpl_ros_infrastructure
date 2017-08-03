@@ -1,0 +1,19 @@
+<launch>
+    <!-- Rosbag record -->
+    <node pkg="rosbag" type="record" name="rosbag_record_standard_data" respawn="true" output="screen"
+        args="-o /home/odroid/ANPL/data/ANPL_pixhawk_xtion_duo3d_viso2
+	             /mavros/imu/data_raw
+		     /mavros/local_position/odom
+		     /mavros/local_position/pose
+		     /mavros/battery
+		     /camera/depth/points_2Hz
+		     /duo3d/left/image_rect
+		     /duo3d/left/camera_info
+                     /duo3d/right/image_rect
+		     /duo3d/right/camera_info
+		     /duo3d/imu/data_raw
+		     /stereo_odometer/odometry
+		     /stereo_odometer/pose
+	"
+    />
+</launch>
