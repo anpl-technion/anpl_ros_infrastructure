@@ -256,7 +256,8 @@ void move(const char tav, const ros::Publisher &trajectory_pub)
       
       if(n_seq == 0) // first takeoff
       {
-        desired_yaw = M_PI / 2;
+        //desired_yaw = -M_PI / 2;
+        desired_yaw = M_PI;
         ROS_INFO("Takeoff at: [%f, %f, %f], yaw: %f.", desired_x, desired_y, desired_z, desired_yaw);
       }
       else
