@@ -1,0 +1,28 @@
+<launch>
+  <arg name="world_name" default="willowgarage.world"/>
+  <!--
+  <env name="GAZEBO_MODEL_PATH" value="$GAZEBO_MODEL_PATH:$(find amr_robots_gazebo)/models" />
+  <env name="GAZEBO_RESOURCE_PATH" value="$GAZEBO_RESOURCE_PATH:$(find amr_robots_gazebo)/models" />
+-->
+  <!-- <arg name="world" default="worlds/empty.world" /> -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+	<arg name="world_name" value="$(find anpl_inf)/gazebo_worlds/$(arg world_name)" />
+  </include>
+
+  <arg name="urdf" default="$(find anpl_inf)/robots_description/pioneer_description/pioneer3at.urdf" />
+  <arg name="name" default="pioneer3dx" />
+  <param name="robot_description" command="$(find xacro)/xacro.py $(arg urdf)" />
+  <arg name="init_pose" value="-x -9.22 -y -19.36 -z 0 -Y 1.5708 -R 0.0 -P 0.0"/>
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+        args="$(arg init_pose) -unpause -param robot_description -urdf -model $(arg name)">
+  
+  </node>
+  
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+  <node name="pioneer_gazebo_keyop" pkg="pioneer_keyop" type="pioneer_gazebo_keyop" output="screen">
+    <param name="robotName" type="string" value="sim_p3at"/>
+  </node>
+
+</launch>
+
