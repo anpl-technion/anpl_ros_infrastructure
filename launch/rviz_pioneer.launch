@@ -1,11 +1,11 @@
 <launch>
-  <arg name="type" default="pioneer3at" />
+  <arg name="type" default="pioneer3at.urdf" />
   <arg name="model" value='$(find anpl_inf)/robots_description/pioneer_description/$(arg type).xacro'/>
   <arg name="robot_name" default="pioneer1" />
   
 
  
-  <param name="robot_description4" command="$(find xacro)/xacro '$(arg model)' robot_name:=$(arg robot_name)" />
+  <param name="robot_description" command="$(find xacro)/xacro '$(arg model)' robot_name:=$(arg robot_name)" />
   <arg name="rvizconfig" default="$(find anpl_inf)/rviz/pioneer.rviz" />
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />

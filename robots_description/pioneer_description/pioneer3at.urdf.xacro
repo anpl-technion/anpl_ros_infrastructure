@@ -4,7 +4,8 @@
        xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
        xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
        xmlns:xacro="http://ros.org/wiki/xacro"
-name="pioneer3at">
+name="pioneer3at"
+robot_name="$(arg robot_name)">
 
 <!-- Chassis -->
 	<link name="base_link">
@@ -367,7 +368,7 @@ name="pioneer3at">
 <gazebo>
   <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
     <updateRate>100.0</updateRate>
-    <robotNamespace>sim_p3at</robotNamespace>
+    <robotNamespace>$(arg robot_name)</robotNamespace>
     <leftFrontJoint>p3at_front_left_wheel_joint</leftFrontJoint>
     <rightFrontJoint>p3at_front_right_wheel_joint</rightFrontJoint>
     <leftRearJoint>p3at_back_left_wheel_joint</leftRearJoint>
@@ -452,7 +453,7 @@ name="pioneer3at">
         </noise>
       </ray>
       <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
-        <topicName>/laser/scan</topicName>
+        <topicName>laser/scan</topicName>
         <frameName>hokuyo_link</frameName>
       </plugin>
     </sensor>

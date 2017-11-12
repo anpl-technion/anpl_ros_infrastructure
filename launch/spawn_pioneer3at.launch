@@ -1,15 +1,15 @@
 <launch>
-  <!-- send table.xml to param server -->
-    <arg name="robot_name" default="pioneer1"/>
-    <arg name="init_pose"/>
 
-    <!-- load the robot description -->
-    <arg name="model" default="$(find xacro)/xacro.py '$(find anpl_inf)/robots_description/pioneer_description/pioneer3at.xacro' robot_name:=$(arg robot_name)" />
-    <param name="pioneer_description" command="$(arg model)" />
-
-    <!-- Gazebo model spawner -->
-    <node name="$(arg robot_name)_spawn_pionner_model" pkg="gazebo_ros" type="spawn_model"
-          args="$(arg init_pose) -unpause -urdf -param pioneer_description -model $(arg robot_name)_Pioneer3at"/>
+  <arg name="urdf" default="$(find anpl_inf)/robots_description/pioneer_description/pioneer3at.urdf.xacro" />
+  <param name="robot_description" command="$(find xacro)/xacro $(arg urdf) robot_name:=$(arg robot_name)" />
+  <arg name="robot_name" default="pioneer3dx" />
+  <arg name="init_pose" default="-x 0.0 -y 0.0 -z 0.0 -Y 0.0 -R 0.0 -P 0.0"/>
+  
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+        args="$(arg init_pose) -unpause -param robot_description -urdf -model $(arg robot_name)">
+  </node>
+  
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
 </launch>
 
