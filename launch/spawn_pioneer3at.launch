@@ -11,5 +11,9 @@
   
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
+  <node name="pioneer_gazebo_keyop" pkg="pioneer_keyop" type="pioneer_gazebo_keyop" output="screen" launch-prefix="xterm -e">
+    <rosparam param="robotName" subst_value="True">$(arg robot_name)</rosparam>
+  </node>
+
 </launch>
 
