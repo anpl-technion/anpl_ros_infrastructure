@@ -20,8 +20,6 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
   tf
   rviz
-  rotors_gazebo
-  rotors_control
 )
 
 ## System dependencies are found with CMake's conventions
@@ -161,14 +159,14 @@ endif()
 
 find_package(ompl)
 
-add_executable(mav_takeoff src/mav_takeoff.cpp)
-target_link_libraries(mav_takeoff ${catkin_LIBRARIES})
+#add_executable(mav_takeoff src/mav_takeoff.cpp)
+#target_link_libraries(mav_takeoff ${catkin_LIBRARIES})
 
-add_executable(mav_pose_control src/mav_pose_control.cpp)
-target_link_libraries(mav_pose_control ${catkin_LIBRARIES})
+#add_executable(mav_pose_control src/mav_pose_control.cpp)
+#target_link_libraries(mav_pose_control ${catkin_LIBRARIES})
 
-add_executable(mav_keyboard_control src/mav_keyboard_control.cpp)
-target_link_libraries(mav_keyboard_control ${catkin_LIBRARIES})
+#add_executable(mav_keyboard_control src/mav_keyboard_control.cpp)
+#target_link_libraries(mav_keyboard_control ${catkin_LIBRARIES})
 
 #add_executable(OdometryExample src/OdometryExample.cpp)
 #target_link_libraries(OdometryExample ${GTSAM_LIBRARIES})
