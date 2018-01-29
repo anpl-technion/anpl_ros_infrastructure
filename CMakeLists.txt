@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(anpl_inf)
 
+## Compile as C++11, supported in ROS Kinetic and newer
+add_compile_options(-std=c++11)
+
 #create ARCHITECTURE variable to detect if it arm(odroid) or pc (or more in the future)
 #from http://stackoverflow.com/questions/11944060/how-to-detect-target-architecture-using-cmake
 #from http://www.cyberciti.biz/faq/sed-remove-all-digits-input-from-input/

@@ -10,5 +10,6 @@
     <include>
       <uri>model://willowgarage</uri>
     </include>
+    <plugin name='gazebo_octomap' filename='librotors_gazebo_octomap_plugin.so'/>
   </world>
 </sdf>
