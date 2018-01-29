@@ -1,0 +1,10 @@
+<launch>
+
+  <!-- <arg name="world" default="worlds/empty.world" /> -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+	<arg name="world_name" value="$(find anpl_inf)/gazebo_worlds/empty_minus_z.world" />
+  </include>
+
+
+</launch>
+
