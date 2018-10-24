@@ -1,0 +1,19 @@
+<launch>
+
+  <arg name="urdf" default="$(find anpl_inf)/robots_description/pioneer_description/pioneer3atB.urdf.xacro" />
+  <param name="robot_description" command="$(find xacro)/xacro $(arg urdf) robot_name:=$(arg robot_name)" />
+  <arg name="robot_name" default="pioneer3dx" />
+  <arg name="init_pose" default="-x 0.0 -y 0.0 -z 0.0 -Y 0.0 -R 0.0 -P 0.0"/>
+  
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+        args="$(arg init_pose) -unpause -param robot_description -urdf -model $(arg robot_name)">
+  </node>
+  
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+  <node name="pioneer_gazebo_keyop" pkg="pioneer_keyop" type="pioneer_gazebo_keyop" output="screen" launch-prefix="xterm -e">
+    <rosparam param="robotName" subst_value="True">$(arg robot_name)</rosparam>
+  </node>
+
+</launch>
+
